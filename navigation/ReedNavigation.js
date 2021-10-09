@@ -6,10 +6,9 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import { createStackNavigator } from 'react-navigation-stack'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import DestinationScreen from '../screens/DestinationScreen'
+import InsertLocationScreen from '../screens/InsertLocationScreen'
 import HomeMapScreen from '../screens/HomeMapScreen'
 import HomeNewsScreen from '../screens/HomeNewsScreen'
-
 
 import Colors from '../constants/Colors';
 
@@ -22,10 +21,17 @@ const defaultStackNavOptions = {
 
 const mapNavigator = createStackNavigator({
     Home: {
-        screen: HomeMapScreen
+        screen: HomeMapScreen,
+        navigationOptions: {
+            headerShown: false,
+            tabBarVisible: false,
+        }
     },
-    destination: {
-        screen: DestinationScreen
+    InsertLocation: {
+        screen: InsertLocationScreen,
+        navigationOptions: {
+            headerShown: false
+        }
     }
 }, {
     defaultNavigationOptions: defaultStackNavOptions
@@ -59,7 +65,7 @@ const tabScreenConfig = {
         screen: newsNavigator,
         navigationOptions: {
             tabBarIcon: tabInfo => {
-                return <FontAwesome name="newspaper-o" size={25} color={tabInfo.tintColor} />;
+                return <FontAwesome name="newspaper-o" size={25} color={tabInfo.tintColor} />
             },
         tabBarColor: Colors.accentColor,
         tabBarLabel:
