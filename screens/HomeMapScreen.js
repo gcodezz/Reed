@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import { 
     View, 
     Text,
@@ -7,31 +8,63 @@ import {
     TouchableWithoutFeedback,
     StyleSheet 
 } from 'react-native'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 import { Ionicons } from '@expo/vector-icons'
 import * as Location from 'expo-location'
 
+import * as addressAction from '../store/action'
+
 const HomeScreen = props => {
-    const [location, setLocation] = useState(null)
+    const [location, setLocation] = useState({
+        "coords": {
+            "latitude": 0.0,
+            "longitude": 0.0,
+        }
+    })
     const [errorMsg, setErrorMsg] = useState(null)
 
-    useEffect(() => {
-        (async () => {
-            let { status } = await Location.requestForegroundPermissionsAsync();
+    const dispatch = useDispatch()
+
+    const loadLocation = useCallback(async() => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 setErrorMsg('Permission to access location was denied')
                 return
             }
-        
-            // let location = await Location.getCurrentPositionAsync({})
-            // console.log(location)
-            // setLocation(location)
-        })()
-      }, [])
-    
+            let location = await Location.getCurrentPositionAsync({})
+            setLocation(location)
+            try {
+                dispatch(addressAction.fetchUserLocation(location))
+            } catch (e) {
+
+            }
+    }, [setLocation])
+
+    useEffect(() => {
+        loadLocation()
+      }, [loadLocation])
+      
     return (
         <View style ={styles.container}>
-            <MapView style={styles.map} />
+            <MapView 
+                style={styles.map} 
+                initialRegion={{
+                    latitude: 7.4463584083568435,
+                    longitude: 3.8932349126516748,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+                region={{
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421,
+                }}
+            >
+                <Marker
+                    coordinate={{ latitude : location.coords.latitude , longitude : location.coords.longitude }}
+                />
+            </MapView>
             <TouchableWithoutFeedback onPress={() => console.log('Alert')}>
                 <View style={styles.menuWrapper}>
                     <Ionicons name="ios-menu" size={32} color='black' />

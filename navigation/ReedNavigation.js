@@ -9,6 +9,7 @@ import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import InsertLocationScreen from '../screens/InsertLocationScreen'
 import HomeMapScreen from '../screens/HomeMapScreen'
 import HomeNewsScreen from '../screens/HomeNewsScreen'
+import DirectionScreen from '../screens/DirectionScreen'
 
 import Colors from '../constants/Colors';
 
@@ -29,6 +30,12 @@ const mapNavigator = createStackNavigator({
     },
     InsertLocation: {
         screen: InsertLocationScreen,
+        navigationOptions: {
+            headerShown: false
+        }
+    },
+    Direction: {
+        screen: DirectionScreen,
         navigationOptions: {
             headerShown: false
         }
