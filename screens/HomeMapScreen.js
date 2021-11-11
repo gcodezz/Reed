@@ -12,7 +12,7 @@ import MapView, { Marker } from 'react-native-maps'
 import { Ionicons } from '@expo/vector-icons'
 import * as Location from 'expo-location'
 
-import * as addressAction from '../store/action'
+import * as addressAction from '../store/actions/address'
 
 const HomeScreen = props => {
     const [location, setLocation] = useState({
@@ -65,7 +65,9 @@ const HomeScreen = props => {
                     coordinate={{ latitude : location.coords.latitude , longitude : location.coords.longitude }}
                 />
             </MapView>
-            <TouchableWithoutFeedback onPress={() => console.log('Alert')}>
+            <TouchableWithoutFeedback onPress={() => {
+                props.navigation.toggleDrawer()
+            }}>
                 <View style={styles.menuWrapper}>
                     <Ionicons name="ios-menu" size={32} color='black' />
                 </View>
@@ -75,9 +77,7 @@ const HomeScreen = props => {
                     <View style={styles.modalView}>
                         <TouchableHighlight
                             style={{ borderRadius: 10 }}
-                            onPress={() => props.navigation.navigate({
-                                routeName: 'InsertLocation'
-                            })}>
+                            onPress={() => props.navigation.navigate('InsertLocation')}>
                             <View style={styles.whereToStyle}>
                                 <Ionicons name="ios-search" size={25} color='black' />
                                 <Text style={{ ...styles.whereToText, fontWeight: 'bold' }}>Where to?</Text>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     },
     map: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height / 1.3,
+        height: Dimensions.get('window').height / 1.15,
     },
     centeredView: {
         flex: 1,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         marginTop: 22,
     },
     modalView: {        
-        height: Dimensions.get('window').height / 3.5,
+        height: Dimensions.get('window').height / 7,
         width: "100%",
         backgroundColor: 'white',
         borderTopLeftRadius: 13,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     whereToText: {
         fontSize: 20,
-        fontFamily: 'RubikBold',
+        fontFamily: 'KarlaBold',
         paddingLeft: 8
     },
     menuWrapper: {

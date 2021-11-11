@@ -6,25 +6,32 @@ import {
     TouchableWithoutFeedback,
     StyleSheet
 } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Feather, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
 import GooglePlace from '../components/GooglePlace'
+import * as addressAction from '../store/actions/address'
 
 const DestinationScreen = props => {
     const userAddress = useSelector(state => state.address.userAddress)
-    // console.log(userAddress)
+    
+    const dispatch = useDispatch()
+
     const inputEl = useRef()
     const inputEl2 = useRef()
+
     useEffect(() => {
         inputEl.current.focus()
         inputEl2.current.setAddressText(userAddress)
     }, [])
 
-    const handleText = (text) => {
-        inputEl.current.setAddressText(text)
-        inputEl.current.getCurrentLocation
+    const onPressHandler = async(data, details = null) => {
+        await dispatch(addressAction.getUserDestination(data)).then(() => {
+            dispatch(addressAction.getTime('WALKING'))
+            props.navigation.navigate('Direction')
+        })
     }
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={{ marginHorizontal: 30 }}>
@@ -38,7 +45,7 @@ const DestinationScreen = props => {
                         <Text 
                             style={{
                                 fontSize: 18,
-                                fontFamily: 'RubikBold'
+                                fontFamily: 'KarlaBold'
                             }}>Select destination
                         </Text>
                     </View>
@@ -56,7 +63,10 @@ const DestinationScreen = props => {
                     <View style={styles.icon}>
                         <MaterialIcons name="location-on" size={20} color='#5353c6' />
                     </View>
-                    <GooglePlace focus={inputEl} />
+                    <GooglePlace 
+                        focus={inputEl} 
+                        parentCallback={onPressHandler}
+                    />
                 </View>
             </View>
         </SafeAreaView>

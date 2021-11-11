@@ -4,6 +4,11 @@ import { GOOGLE_MAPS_APIKEY } from '@env'
 
 const GooglePlace = props => {
     const top = props.top ? 120 : 60
+
+    const getDetails = (data, details = null) => {
+        props.parentCallback(data, details)
+    }
+
     return (
         <GooglePlacesAutocomplete
             ref={props.focus}
@@ -13,6 +18,7 @@ const GooglePlace = props => {
                 language: 'en',
                 components: 'country:ng'
             }}
+            onPress={getDetails}
             styles={{
                 textInput: {
                     backgroundColor: '#e6e6e6',
