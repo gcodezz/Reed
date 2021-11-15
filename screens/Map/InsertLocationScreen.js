@@ -9,8 +9,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { Feather, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 
-import GooglePlace from '../components/GooglePlace'
-import * as addressAction from '../store/actions/address'
+import GooglePlace from '../../components/GooglePlace'
+import * as addressAction from '../../store/actions/address'
 
 const DestinationScreen = props => {
     const userAddress = useSelector(state => state.address.userAddress)

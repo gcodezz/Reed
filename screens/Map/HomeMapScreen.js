@@ -12,7 +12,7 @@ import MapView, { Marker } from 'react-native-maps'
 import { Ionicons } from '@expo/vector-icons'
 import * as Location from 'expo-location'
 
-import * as addressAction from '../store/actions/address'
+import * as addressAction from '../../store/actions/address'
 
 const HomeScreen = props => {
     const [location, setLocation] = useState({
@@ -77,7 +77,7 @@ const HomeScreen = props => {
                     <View style={styles.modalView}>
                         <TouchableHighlight
                             style={{ borderRadius: 10 }}
-                            onPress={() => props.navigation.navigate('InsertLocation')}>
+                            onPress={() => props.navigation.navigate('Options')}>
                             <View style={styles.whereToStyle}>
                                 <Ionicons name="ios-search" size={25} color='black' />
                                 <Text style={{ ...styles.whereToText, fontWeight: 'bold' }}>Where to?</Text>

@@ -14,7 +14,7 @@ import MapViewDirections from 'react-native-maps-directions'
 import { Feather, MaterialCommunityIcons, MaterialIcons, Ionicons } from '@expo/vector-icons'
 
 import { GOOGLE_MAPS_APIKEY } from '@env'
-import * as addressAction from '../store/actions/address'
+import * as addressAction from '../../store/actions/address'
 
 let { width, height } = Dimensions.get('window')
 
@@ -32,16 +32,11 @@ const Direction = (props) => {
         walkingData
     } = useSelector(state => state.address)
 
-    // const destinationObj = useSelector(state => state.address.destinationCoords)
-    // const originObj = useSelector(state => state.address.userCoords)
-    // const drivingData = useSelector(state => state.address.drivingData)
-    // const walkingData = useSelector(state => state.address.walkingData)
-
     const destination = {
         lat: destinationObj.lat, 
         lng: destinationObj.lng
     }
-    
+
     const origin = {
         lat: originObj.lat, 
         lng: originObj.lng
@@ -67,7 +62,7 @@ const Direction = (props) => {
                                 style={{
                                     fontSize: 18,
                                     fontFamily: 'KarlaBold'
-                                }}>Select destination
+                                }}>Route Details
                             </Text>
                         </View>
                     </View>

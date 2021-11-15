@@ -9,8 +9,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons'
 
-import HeaderButton from '../components/HeaderButton'
-import * as newsAction from '../store/actions/news'
+import HeaderButton from '../../components/HeaderButton'
+import * as newsAction from '../../store/actions/news'
 
 const HomeNewsScreen = (props) => {
     const dispatch = useDispatch()

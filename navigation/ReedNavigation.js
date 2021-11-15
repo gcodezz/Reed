@@ -5,14 +5,15 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 
-import InsertLocationScreen from '../screens/InsertLocationScreen'
-import HomeMapScreen from '../screens/HomeMapScreen'
-import HomeNewsScreen, { screenOptions as HomeNewsScreenOptions } from '../screens/HomeNewsScreen'
-import DirectionScreen from '../screens/DirectionScreen'
-import DetailNewsScreen from '../screens/DetailNewsScreen'
-import BulletinScreen, { screenOptions as BulletinScreenOptions } from '../screens/BulletinScreen'
+import InsertLocationScreen from '../screens/Map/InsertLocationScreen'
+import HomeMapScreen from '../screens/Map/HomeMapScreen'
+import HomeNewsScreen, { screenOptions as HomeNewsScreenOptions } from '../screens/News/HomeNewsScreen'
+import DirectionScreen from '../screens/Map/DirectionScreen'
+import BulletinScreen, { screenOptions as BulletinScreenOptions } from '../screens/Bulletin/BulletinScreen'
+import DetailScreen from '../screens/General/DetailScreen'
+import OptionsScreen from '../screens/Map/OptionsScreen'
 
-import Colors from '../constants/Colors';
+import Colors from '../constants/Colors'
 
 const defaultStackNavOptions = {
     headerStyle: {
@@ -30,6 +31,18 @@ const MapNavigator = () => {
             <MapStackNavigator.Screen 
                 name='HomeMap'
                 component={HomeMapScreen}
+                screenOptions={{
+                    headerShown: false
+                }}
+            />
+            <MapStackNavigator.Screen 
+                name='Options'
+                component={OptionsScreen}
+                options={{
+                    headerShown: true,
+                    headerBackTitle: 'Back',
+                    headerTitle: ''
+                }}
             />
             <MapStackNavigator.Screen 
                 name='InsertLocation'
@@ -55,7 +68,7 @@ const NewsNavigator = () => {
             />
             <NewsStackNavigator.Screen 
                 name='Details'
-                component={DetailNewsScreen}
+                component={DetailScreen}
                 options={{
                     headerTitle: ''
                 }}
@@ -73,6 +86,13 @@ const BulletinNavigator = () => {
                 name='Bulletins'
                 component={BulletinScreen}
                 options={BulletinScreenOptions}
+            />
+            <BulletinStackNavigator.Screen 
+                name='BulletinDetail'
+                component={DetailScreen}
+                options={{
+                    headerTitle: ''
+                }}
             />
         </BulletinStackNavigator.Navigator>
     )

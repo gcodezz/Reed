@@ -10,12 +10,14 @@ import { LogBox } from 'react-native'
 import ReedNavigator from './navigation/ReedNavigation'
 import addressReducer from './store/reducers/address'
 import newsReducer from './store/reducers/news'
+import bulletinReducer from './store/reducers/bulletin'
 
 enableScreens()
 
 const rootReducer = combineReducers({
   address: addressReducer,
-  news: newsReducer
+  news: newsReducer,
+  bulletin: bulletinReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk))
