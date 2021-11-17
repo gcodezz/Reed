@@ -1,4 +1,4 @@
-import BulletinFeed from '../../data/bulletinData'
+import BulletinFeed from '../../data/bulletin'
 import { GET_BULLETINS } from '../actions/bulletin'
 
 const initialState = {

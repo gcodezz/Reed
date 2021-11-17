@@ -1,4 +1,4 @@
-import NewsFeed from '../../data/newsData'
+import NewsFeed from '../../data/news'
 import { GET_NEWS } from '../actions/news'
 
 const initialState = {

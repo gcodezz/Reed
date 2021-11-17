@@ -36,6 +36,7 @@ export const fetchUserLocation = location => {
 }
 
 export const getUserDestination = ({ description }) => {
+    console.log(description)
     return async dispatch => {
         const encodedAddress = encodeURI(description)
         const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${GOOGLE_MAPS_APIKEY}`)
@@ -43,6 +44,7 @@ export const getUserDestination = ({ description }) => {
             throw new Error("Error fetching geocoded address")
         }
         const resData = await response.json()
+        console.log(resData)
         const coords = resData.results[0].geometry.location
         dispatch({
             type: UPDATE_DESTINATION_ADDRESS,
@@ -68,7 +70,7 @@ export const getTime = (mode) => {
         
         console.log(encodedOrigin)
         console.log(encodedDestination)
-        
+
         const response = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${encodedOrigin}&destination=${encodedDestination}&mode=${newMode}&key=${GOOGLE_MAPS_APIKEY}`)
         if (!response.ok) {
             throw new Error("Error fetching geocoded address")

@@ -12,6 +12,7 @@ import DirectionScreen from '../screens/Map/DirectionScreen'
 import BulletinScreen, { screenOptions as BulletinScreenOptions } from '../screens/Bulletin/BulletinScreen'
 import DetailScreen from '../screens/General/DetailScreen'
 import OptionsScreen from '../screens/Map/OptionsScreen'
+import SearchLecturerScreen from '../screens/Map/SearchLecturerScreen'
 
 import Colors from '../constants/Colors'
 
@@ -51,6 +52,14 @@ const MapNavigator = () => {
             <MapStackNavigator.Screen 
                 name='Direction'
                 component={DirectionScreen}
+            />
+            <MapStackNavigator.Screen 
+                name='SearchLecturer'
+                component={SearchLecturerScreen}
+                options={{
+                    headerShown: true,
+                    headerTitle: ''
+                }}
             />
         </MapStackNavigator.Navigator>
     )

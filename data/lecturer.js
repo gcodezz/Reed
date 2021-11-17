@@ -4,7 +4,7 @@ const LECTURERS = [
     new Lecturer(
         'n1',
         'Dr. Osunade',
-        'Computer Science Department, University of Ibadan'
+        'Computer Science Department, University of Ibadan, Ibadan, Nigeria'
     ),
     new Lecturer(
         'n2',

@@ -32,6 +32,8 @@ const Direction = (props) => {
         walkingData
     } = useSelector(state => state.address)
 
+    const routeParams = props.route.params ? props.route.params : {}
+
     const destination = {
         lat: destinationObj.lat, 
         lng: destinationObj.lng
@@ -70,20 +72,27 @@ const Direction = (props) => {
                         <View style={styles.icon}>
                             <MaterialCommunityIcons name="disc" size={20} color='#00cc00' />
                         </View>
-                        <View style={styles.textInput}><Text style={{ fontSize: 18 }}>{userAddress}</Text></View>
+                        <View style={styles.textInput}>
+                            <Text style={{ fontSize: 18 }}>{userAddress}</Text>
+                        </View>
                     </View>
                     <View style={styles.row}>
                         <View style={styles.icon}>
                             <MaterialIcons name="location-on" size={20} color='#5353c6' />
                         </View>
-                        <View style={styles.textInput}><Text style={{ fontSize: 18 }}>{destinationAddress}</Text></View>
+                        <View style={styles.textInput}>
+                            <Text style={{ fontSize: 18 }}>
+                                {routeParams.lecturerName ? routeParams.lecturerName : destinationAddress}
+                            </Text>
+                        </View>
                     </View>
                     <View>
 
                     </View>
                 </View>
                 <View style={{ flexDirection: 'row', width: '90%', justifyContent: 'space-around' }}>
-                    <TouchableOpacity style={[styles.iconStyle, moveMode == 'DRIVING' ? styles.highLight : null]}
+                    <TouchableOpacity 
+                        style={[styles.iconStyle, moveMode == 'DRIVING' ? styles.highLight : null]}
                         onPress={() => {
                             handleModePress('DRIVING')
                         }}
